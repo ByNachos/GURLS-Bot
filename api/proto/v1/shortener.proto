@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package shortener.v1;
+
+// Используем твой правильный вариант go_package
+option go_package = "gen/go/shortener/v1;shortenerv1";
+
+// *** ГЛАВНОЕ ИСПРАВЛЕНИЕ ЗДЕСЬ ***
+// Убираем лишние префиксы из путей импорта
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service Shortener {
+  rpc CreateLink(CreateLinkRequest) returns (CreateLinkResponse);
+  rpc GetLinkStats(GetLinkStatsRequest) returns (GetLinkStatsResponse);
+  rpc DeleteLink(DeleteLinkRequest) returns (google.protobuf.Empty);
+  rpc ListUserLinks(ListUserLinksRequest) returns (ListUserLinksResponse);
+  rpc RecordClick(RecordClickRequest) returns (google.protobuf.Empty);
+}
+
+message CreateLinkRequest {
+  string original_url = 1;
+  int64 user_tg_id = 2;
+  optional string title = 3;
+  optional google.protobuf.Timestamp expires_at = 4;
+  optional string custom_alias = 5;
+}
+
+message CreateLinkResponse {
+  string alias = 1;
+}
+
+message GetLinkStatsRequest {
+  string alias = 1;
+}
+
+message GetLinkStatsResponse {
+  string original_url = 1;
+  int64 click_count = 2;
+  optional string title = 3;
+  optional google.protobuf.Timestamp expires_at = 4;
+  map<string, int64> clicks_by_device = 5;
+}
+
+message DeleteLinkRequest {
+  string alias = 1;
+}
+
+message ListUserLinksRequest {
+  int64 user_tg_id = 1;
+}
+
+message LinkInfo {
+  string alias = 1;
+  string original_url = 2;
+  optional string title = 3;
+}
+
+message ListUserLinksResponse {
+  repeated LinkInfo links = 1;
+}
+
+message RecordClickRequest {
+  string alias = 1;
+  string device_type = 2;
+}

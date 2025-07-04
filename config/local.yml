@@ -1,0 +1,11 @@
+env: "local"
+
+telegram:
+  token: ${TELEGRAM_TOKEN}
+
+grpc_client:
+  backend_address: "localhost:50051"
+  timeout: 5s
+
+http_server:
+  base_url: "http://127.0.0.1:8080"

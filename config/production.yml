@@ -1,0 +1,11 @@
+env: "production"
+
+telegram:
+  token: ${TELEGRAM_TOKEN}
+
+grpc_client:
+  backend_address: ${GRPC_BACKEND_ADDRESS}
+  timeout: 10s
+
+http_server:
+  base_url: ${BASE_URL}
