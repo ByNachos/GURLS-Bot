@@ -14,7 +14,7 @@ ARG TARGETARCH
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH:-amd64} go build \
     -ldflags="-s -w" \
     -trimpath \
-    -o service ./cmd/app
+    -o service ./cmd/bot
 
 # Stage 2: Production runtime
 FROM gcr.io/distroless/static-debian12:nonroot AS final
