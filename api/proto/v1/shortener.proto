@@ -16,6 +16,7 @@ service Shortener {
   rpc DeleteLink(DeleteLinkRequest) returns (google.protobuf.Empty);
   rpc ListUserLinks(ListUserLinksRequest) returns (ListUserLinksResponse);
   rpc RecordClick(RecordClickRequest) returns (google.protobuf.Empty);
+  rpc RedirectAndRecord(RedirectAndRecordRequest) returns (RedirectAndRecordResponse);
 }
 
 message CreateLinkRequest {
@@ -63,4 +64,22 @@ message ListUserLinksResponse {
 message RecordClickRequest {
   string alias = 1;
   string device_type = 2;
+  optional string ip_address = 3;
+  optional string user_agent = 4;
+  optional string referer = 5;
+  optional google.protobuf.Timestamp clicked_at = 6;
+}
+
+message RedirectAndRecordRequest {
+  string alias = 1;
+  optional string ip_address = 2;
+  optional string user_agent = 3;
+  optional string referer = 4;
+  optional google.protobuf.Timestamp clicked_at = 5;
+}
+
+message RedirectAndRecordResponse {
+  string original_url = 1;
+  optional string title = 2;
+  optional google.protobuf.Timestamp expires_at = 3;
 }

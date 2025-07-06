@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Shortener_CreateLink_FullMethodName    = "/shortener.v1.Shortener/CreateLink"
-	Shortener_GetLinkStats_FullMethodName  = "/shortener.v1.Shortener/GetLinkStats"
-	Shortener_DeleteLink_FullMethodName    = "/shortener.v1.Shortener/DeleteLink"
-	Shortener_ListUserLinks_FullMethodName = "/shortener.v1.Shortener/ListUserLinks"
-	Shortener_RecordClick_FullMethodName   = "/shortener.v1.Shortener/RecordClick"
+	Shortener_CreateLink_FullMethodName        = "/shortener.v1.Shortener/CreateLink"
+	Shortener_GetLinkStats_FullMethodName      = "/shortener.v1.Shortener/GetLinkStats"
+	Shortener_DeleteLink_FullMethodName        = "/shortener.v1.Shortener/DeleteLink"
+	Shortener_ListUserLinks_FullMethodName     = "/shortener.v1.Shortener/ListUserLinks"
+	Shortener_RecordClick_FullMethodName       = "/shortener.v1.Shortener/RecordClick"
+	Shortener_RedirectAndRecord_FullMethodName = "/shortener.v1.Shortener/RedirectAndRecord"
 )
 
 // ShortenerClient is the client API for Shortener service.
@@ -36,6 +37,7 @@ type ShortenerClient interface {
 	DeleteLink(ctx context.Context, in *DeleteLinkRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListUserLinks(ctx context.Context, in *ListUserLinksRequest, opts ...grpc.CallOption) (*ListUserLinksResponse, error)
 	RecordClick(ctx context.Context, in *RecordClickRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RedirectAndRecord(ctx context.Context, in *RedirectAndRecordRequest, opts ...grpc.CallOption) (*RedirectAndRecordResponse, error)
 }
 
 type shortenerClient struct {
@@ -96,6 +98,16 @@ func (c *shortenerClient) RecordClick(ctx context.Context, in *RecordClickReques
 	return out, nil
 }
 
+func (c *shortenerClient) RedirectAndRecord(ctx context.Context, in *RedirectAndRecordRequest, opts ...grpc.CallOption) (*RedirectAndRecordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RedirectAndRecordResponse)
+	err := c.cc.Invoke(ctx, Shortener_RedirectAndRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ShortenerServer is the server API for Shortener service.
 // All implementations must embed UnimplementedShortenerServer
 // for forward compatibility.
@@ -105,6 +117,7 @@ type ShortenerServer interface {
 	DeleteLink(context.Context, *DeleteLinkRequest) (*emptypb.Empty, error)
 	ListUserLinks(context.Context, *ListUserLinksRequest) (*ListUserLinksResponse, error)
 	RecordClick(context.Context, *RecordClickRequest) (*emptypb.Empty, error)
+	RedirectAndRecord(context.Context, *RedirectAndRecordRequest) (*RedirectAndRecordResponse, error)
 	mustEmbedUnimplementedShortenerServer()
 }
 
@@ -129,6 +142,9 @@ func (UnimplementedShortenerServer) ListUserLinks(context.Context, *ListUserLink
 }
 func (UnimplementedShortenerServer) RecordClick(context.Context, *RecordClickRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RecordClick not implemented")
+}
+func (UnimplementedShortenerServer) RedirectAndRecord(context.Context, *RedirectAndRecordRequest) (*RedirectAndRecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RedirectAndRecord not implemented")
 }
 func (UnimplementedShortenerServer) mustEmbedUnimplementedShortenerServer() {}
 func (UnimplementedShortenerServer) testEmbeddedByValue()                   {}
@@ -241,6 +257,24 @@ func _Shortener_RecordClick_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shortener_RedirectAndRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RedirectAndRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShortenerServer).RedirectAndRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Shortener_RedirectAndRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShortenerServer).RedirectAndRecord(ctx, req.(*RedirectAndRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Shortener_ServiceDesc is the grpc.ServiceDesc for Shortener service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -267,6 +301,10 @@ var Shortener_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RecordClick",
 			Handler:    _Shortener_RecordClick_Handler,
+		},
+		{
+			MethodName: "RedirectAndRecord",
+			Handler:    _Shortener_RedirectAndRecord_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

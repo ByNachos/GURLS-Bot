@@ -74,6 +74,24 @@ func (c *BackendClient) ListUserLinks(ctx context.Context, req *shortenerv1.List
 	return resp, nil
 }
 
+func (c *BackendClient) RecordClick(ctx context.Context, req *shortenerv1.RecordClickRequest) error {
+	_, err := c.client.RecordClick(ctx, req)
+	if err != nil {
+		c.log.Error("failed to record click via backend", zap.Error(err))
+		return err
+	}
+	return nil
+}
+
+func (c *BackendClient) RedirectAndRecord(ctx context.Context, req *shortenerv1.RedirectAndRecordRequest) (*shortenerv1.RedirectAndRecordResponse, error) {
+	resp, err := c.client.RedirectAndRecord(ctx, req)
+	if err != nil {
+		c.log.Error("failed to redirect and record via backend", zap.Error(err))
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *BackendClient) Close() error {
 	return c.conn.Close()
 }

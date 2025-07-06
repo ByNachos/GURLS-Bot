@@ -459,6 +459,10 @@ type RecordClickRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Alias         string                 `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
 	DeviceType    string                 `protobuf:"bytes,2,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	IpAddress     *string                `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3,oneof" json:"ip_address,omitempty"`
+	UserAgent     *string                `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
+	Referer       *string                `protobuf:"bytes,5,opt,name=referer,proto3,oneof" json:"referer,omitempty"`
+	ClickedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=clicked_at,json=clickedAt,proto3,oneof" json:"clicked_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -507,6 +511,170 @@ func (x *RecordClickRequest) GetDeviceType() string {
 	return ""
 }
 
+func (x *RecordClickRequest) GetIpAddress() string {
+	if x != nil && x.IpAddress != nil {
+		return *x.IpAddress
+	}
+	return ""
+}
+
+func (x *RecordClickRequest) GetUserAgent() string {
+	if x != nil && x.UserAgent != nil {
+		return *x.UserAgent
+	}
+	return ""
+}
+
+func (x *RecordClickRequest) GetReferer() string {
+	if x != nil && x.Referer != nil {
+		return *x.Referer
+	}
+	return ""
+}
+
+func (x *RecordClickRequest) GetClickedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ClickedAt
+	}
+	return nil
+}
+
+type RedirectAndRecordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Alias         string                 `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
+	IpAddress     *string                `protobuf:"bytes,2,opt,name=ip_address,json=ipAddress,proto3,oneof" json:"ip_address,omitempty"`
+	UserAgent     *string                `protobuf:"bytes,3,opt,name=user_agent,json=userAgent,proto3,oneof" json:"user_agent,omitempty"`
+	Referer       *string                `protobuf:"bytes,4,opt,name=referer,proto3,oneof" json:"referer,omitempty"`
+	ClickedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=clicked_at,json=clickedAt,proto3,oneof" json:"clicked_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RedirectAndRecordRequest) Reset() {
+	*x = RedirectAndRecordRequest{}
+	mi := &file_v1_shortener_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RedirectAndRecordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RedirectAndRecordRequest) ProtoMessage() {}
+
+func (x *RedirectAndRecordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_shortener_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RedirectAndRecordRequest.ProtoReflect.Descriptor instead.
+func (*RedirectAndRecordRequest) Descriptor() ([]byte, []int) {
+	return file_v1_shortener_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RedirectAndRecordRequest) GetAlias() string {
+	if x != nil {
+		return x.Alias
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordRequest) GetIpAddress() string {
+	if x != nil && x.IpAddress != nil {
+		return *x.IpAddress
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordRequest) GetUserAgent() string {
+	if x != nil && x.UserAgent != nil {
+		return *x.UserAgent
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordRequest) GetReferer() string {
+	if x != nil && x.Referer != nil {
+		return *x.Referer
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordRequest) GetClickedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ClickedAt
+	}
+	return nil
+}
+
+type RedirectAndRecordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OriginalUrl   string                 `protobuf:"bytes,1,opt,name=original_url,json=originalUrl,proto3" json:"original_url,omitempty"`
+	Title         *string                `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=expires_at,json=expiresAt,proto3,oneof" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RedirectAndRecordResponse) Reset() {
+	*x = RedirectAndRecordResponse{}
+	mi := &file_v1_shortener_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RedirectAndRecordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RedirectAndRecordResponse) ProtoMessage() {}
+
+func (x *RedirectAndRecordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_shortener_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RedirectAndRecordResponse.ProtoReflect.Descriptor instead.
+func (*RedirectAndRecordResponse) Descriptor() ([]byte, []int) {
+	return file_v1_shortener_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RedirectAndRecordResponse) GetOriginalUrl() string {
+	if x != nil {
+		return x.OriginalUrl
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordResponse) GetTitle() string {
+	if x != nil && x.Title != nil {
+		return *x.Title
+	}
+	return ""
+}
+
+func (x *RedirectAndRecordResponse) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 var File_v1_shortener_proto protoreflect.FileDescriptor
 
 const file_v1_shortener_proto_rawDesc = "" +
@@ -551,11 +719,44 @@ const file_v1_shortener_proto_rawDesc = "" +
 	"\x05title\x18\x03 \x01(\tH\x00R\x05title\x88\x01\x01B\b\n" +
 	"\x06_title\"E\n" +
 	"\x15ListUserLinksResponse\x12,\n" +
-	"\x05links\x18\x01 \x03(\v2\x16.shortener.v1.LinkInfoR\x05links\"K\n" +
+	"\x05links\x18\x01 \x03(\v2\x16.shortener.v1.LinkInfoR\x05links\"\xab\x02\n" +
 	"\x12RecordClickRequest\x12\x14\n" +
 	"\x05alias\x18\x01 \x01(\tR\x05alias\x12\x1f\n" +
 	"\vdevice_type\x18\x02 \x01(\tR\n" +
-	"deviceType2\x9d\x03\n" +
+	"deviceType\x12\"\n" +
+	"\n" +
+	"ip_address\x18\x03 \x01(\tH\x00R\tipAddress\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"user_agent\x18\x04 \x01(\tH\x01R\tuserAgent\x88\x01\x01\x12\x1d\n" +
+	"\areferer\x18\x05 \x01(\tH\x02R\areferer\x88\x01\x01\x12>\n" +
+	"\n" +
+	"clicked_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tclickedAt\x88\x01\x01B\r\n" +
+	"\v_ip_addressB\r\n" +
+	"\v_user_agentB\n" +
+	"\n" +
+	"\b_refererB\r\n" +
+	"\v_clicked_at\"\x90\x02\n" +
+	"\x18RedirectAndRecordRequest\x12\x14\n" +
+	"\x05alias\x18\x01 \x01(\tR\x05alias\x12\"\n" +
+	"\n" +
+	"ip_address\x18\x02 \x01(\tH\x00R\tipAddress\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"user_agent\x18\x03 \x01(\tH\x01R\tuserAgent\x88\x01\x01\x12\x1d\n" +
+	"\areferer\x18\x04 \x01(\tH\x02R\areferer\x88\x01\x01\x12>\n" +
+	"\n" +
+	"clicked_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tclickedAt\x88\x01\x01B\r\n" +
+	"\v_ip_addressB\r\n" +
+	"\v_user_agentB\n" +
+	"\n" +
+	"\b_refererB\r\n" +
+	"\v_clicked_at\"\xb2\x01\n" +
+	"\x19RedirectAndRecordResponse\x12!\n" +
+	"\foriginal_url\x18\x01 \x01(\tR\voriginalUrl\x12\x19\n" +
+	"\x05title\x18\x02 \x01(\tH\x00R\x05title\x88\x01\x01\x12>\n" +
+	"\n" +
+	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\texpiresAt\x88\x01\x01B\b\n" +
+	"\x06_titleB\r\n" +
+	"\v_expires_at2\x83\x04\n" +
 	"\tShortener\x12O\n" +
 	"\n" +
 	"CreateLink\x12\x1f.shortener.v1.CreateLinkRequest\x1a .shortener.v1.CreateLinkResponse\x12U\n" +
@@ -563,7 +764,8 @@ const file_v1_shortener_proto_rawDesc = "" +
 	"\n" +
 	"DeleteLink\x12\x1f.shortener.v1.DeleteLinkRequest\x1a\x16.google.protobuf.Empty\x12X\n" +
 	"\rListUserLinks\x12\".shortener.v1.ListUserLinksRequest\x1a#.shortener.v1.ListUserLinksResponse\x12G\n" +
-	"\vRecordClick\x12 .shortener.v1.RecordClickRequest\x1a\x16.google.protobuf.EmptyB!Z\x1fgen/go/shortener/v1;shortenerv1b\x06proto3"
+	"\vRecordClick\x12 .shortener.v1.RecordClickRequest\x1a\x16.google.protobuf.Empty\x12d\n" +
+	"\x11RedirectAndRecord\x12&.shortener.v1.RedirectAndRecordRequest\x1a'.shortener.v1.RedirectAndRecordResponseB!Z\x1fgen/go/shortener/v1;shortenerv1b\x06proto3"
 
 var (
 	file_v1_shortener_proto_rawDescOnce sync.Once
@@ -577,41 +779,48 @@ func file_v1_shortener_proto_rawDescGZIP() []byte {
 	return file_v1_shortener_proto_rawDescData
 }
 
-var file_v1_shortener_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_v1_shortener_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_v1_shortener_proto_goTypes = []any{
-	(*CreateLinkRequest)(nil),     // 0: shortener.v1.CreateLinkRequest
-	(*CreateLinkResponse)(nil),    // 1: shortener.v1.CreateLinkResponse
-	(*GetLinkStatsRequest)(nil),   // 2: shortener.v1.GetLinkStatsRequest
-	(*GetLinkStatsResponse)(nil),  // 3: shortener.v1.GetLinkStatsResponse
-	(*DeleteLinkRequest)(nil),     // 4: shortener.v1.DeleteLinkRequest
-	(*ListUserLinksRequest)(nil),  // 5: shortener.v1.ListUserLinksRequest
-	(*LinkInfo)(nil),              // 6: shortener.v1.LinkInfo
-	(*ListUserLinksResponse)(nil), // 7: shortener.v1.ListUserLinksResponse
-	(*RecordClickRequest)(nil),    // 8: shortener.v1.RecordClickRequest
-	nil,                           // 9: shortener.v1.GetLinkStatsResponse.ClicksByDeviceEntry
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 11: google.protobuf.Empty
+	(*CreateLinkRequest)(nil),         // 0: shortener.v1.CreateLinkRequest
+	(*CreateLinkResponse)(nil),        // 1: shortener.v1.CreateLinkResponse
+	(*GetLinkStatsRequest)(nil),       // 2: shortener.v1.GetLinkStatsRequest
+	(*GetLinkStatsResponse)(nil),      // 3: shortener.v1.GetLinkStatsResponse
+	(*DeleteLinkRequest)(nil),         // 4: shortener.v1.DeleteLinkRequest
+	(*ListUserLinksRequest)(nil),      // 5: shortener.v1.ListUserLinksRequest
+	(*LinkInfo)(nil),                  // 6: shortener.v1.LinkInfo
+	(*ListUserLinksResponse)(nil),     // 7: shortener.v1.ListUserLinksResponse
+	(*RecordClickRequest)(nil),        // 8: shortener.v1.RecordClickRequest
+	(*RedirectAndRecordRequest)(nil),  // 9: shortener.v1.RedirectAndRecordRequest
+	(*RedirectAndRecordResponse)(nil), // 10: shortener.v1.RedirectAndRecordResponse
+	nil,                               // 11: shortener.v1.GetLinkStatsResponse.ClicksByDeviceEntry
+	(*timestamppb.Timestamp)(nil),     // 12: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),             // 13: google.protobuf.Empty
 }
 var file_v1_shortener_proto_depIdxs = []int32{
-	10, // 0: shortener.v1.CreateLinkRequest.expires_at:type_name -> google.protobuf.Timestamp
-	10, // 1: shortener.v1.GetLinkStatsResponse.expires_at:type_name -> google.protobuf.Timestamp
-	9,  // 2: shortener.v1.GetLinkStatsResponse.clicks_by_device:type_name -> shortener.v1.GetLinkStatsResponse.ClicksByDeviceEntry
+	12, // 0: shortener.v1.CreateLinkRequest.expires_at:type_name -> google.protobuf.Timestamp
+	12, // 1: shortener.v1.GetLinkStatsResponse.expires_at:type_name -> google.protobuf.Timestamp
+	11, // 2: shortener.v1.GetLinkStatsResponse.clicks_by_device:type_name -> shortener.v1.GetLinkStatsResponse.ClicksByDeviceEntry
 	6,  // 3: shortener.v1.ListUserLinksResponse.links:type_name -> shortener.v1.LinkInfo
-	0,  // 4: shortener.v1.Shortener.CreateLink:input_type -> shortener.v1.CreateLinkRequest
-	2,  // 5: shortener.v1.Shortener.GetLinkStats:input_type -> shortener.v1.GetLinkStatsRequest
-	4,  // 6: shortener.v1.Shortener.DeleteLink:input_type -> shortener.v1.DeleteLinkRequest
-	5,  // 7: shortener.v1.Shortener.ListUserLinks:input_type -> shortener.v1.ListUserLinksRequest
-	8,  // 8: shortener.v1.Shortener.RecordClick:input_type -> shortener.v1.RecordClickRequest
-	1,  // 9: shortener.v1.Shortener.CreateLink:output_type -> shortener.v1.CreateLinkResponse
-	3,  // 10: shortener.v1.Shortener.GetLinkStats:output_type -> shortener.v1.GetLinkStatsResponse
-	11, // 11: shortener.v1.Shortener.DeleteLink:output_type -> google.protobuf.Empty
-	7,  // 12: shortener.v1.Shortener.ListUserLinks:output_type -> shortener.v1.ListUserLinksResponse
-	11, // 13: shortener.v1.Shortener.RecordClick:output_type -> google.protobuf.Empty
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	12, // 4: shortener.v1.RecordClickRequest.clicked_at:type_name -> google.protobuf.Timestamp
+	12, // 5: shortener.v1.RedirectAndRecordRequest.clicked_at:type_name -> google.protobuf.Timestamp
+	12, // 6: shortener.v1.RedirectAndRecordResponse.expires_at:type_name -> google.protobuf.Timestamp
+	0,  // 7: shortener.v1.Shortener.CreateLink:input_type -> shortener.v1.CreateLinkRequest
+	2,  // 8: shortener.v1.Shortener.GetLinkStats:input_type -> shortener.v1.GetLinkStatsRequest
+	4,  // 9: shortener.v1.Shortener.DeleteLink:input_type -> shortener.v1.DeleteLinkRequest
+	5,  // 10: shortener.v1.Shortener.ListUserLinks:input_type -> shortener.v1.ListUserLinksRequest
+	8,  // 11: shortener.v1.Shortener.RecordClick:input_type -> shortener.v1.RecordClickRequest
+	9,  // 12: shortener.v1.Shortener.RedirectAndRecord:input_type -> shortener.v1.RedirectAndRecordRequest
+	1,  // 13: shortener.v1.Shortener.CreateLink:output_type -> shortener.v1.CreateLinkResponse
+	3,  // 14: shortener.v1.Shortener.GetLinkStats:output_type -> shortener.v1.GetLinkStatsResponse
+	13, // 15: shortener.v1.Shortener.DeleteLink:output_type -> google.protobuf.Empty
+	7,  // 16: shortener.v1.Shortener.ListUserLinks:output_type -> shortener.v1.ListUserLinksResponse
+	13, // 17: shortener.v1.Shortener.RecordClick:output_type -> google.protobuf.Empty
+	10, // 18: shortener.v1.Shortener.RedirectAndRecord:output_type -> shortener.v1.RedirectAndRecordResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_v1_shortener_proto_init() }
@@ -622,13 +831,16 @@ func file_v1_shortener_proto_init() {
 	file_v1_shortener_proto_msgTypes[0].OneofWrappers = []any{}
 	file_v1_shortener_proto_msgTypes[3].OneofWrappers = []any{}
 	file_v1_shortener_proto_msgTypes[6].OneofWrappers = []any{}
+	file_v1_shortener_proto_msgTypes[8].OneofWrappers = []any{}
+	file_v1_shortener_proto_msgTypes[9].OneofWrappers = []any{}
+	file_v1_shortener_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_shortener_proto_rawDesc), len(file_v1_shortener_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
